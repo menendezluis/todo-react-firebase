@@ -14,7 +14,10 @@ function App() {
   useEffect(()=> {
     //este codigo inicia cuando carga app.js
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-      setTodos(snapshot.docs.map(doc => doc.data().task ))
+      setTodos(snapshot.docs.map(doc => ({id: doc.id,
+      task: doc.data().task,
+      timestamp: doc.data().timestamp
+      } )))
     })
   },[]);
   
